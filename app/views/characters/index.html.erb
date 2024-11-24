@@ -1,0 +1,8 @@
+<h1>let's get this going</h1>
+<% @characters.each do |character| %>
+  <h2><%= link_to character.name, character_path(character) %></h2>
+<% end %>
+<div>
+  <br>
+  <%= render "shared/char_create", character: @character %>
+</div>
