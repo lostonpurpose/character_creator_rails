@@ -8,8 +8,22 @@
     <li>Gender: <%= @character.gender %></li>
     <%= link_to "Home", characters_path  %>
   </ul>
+
+<%# Dice Roller %>
+  <div>
+    <h2>Roll Your Stats!</h2>
+    <button>ROLL</button>
+      <div class="d-flex">
+        <div class="dice"></div>
+        <div class="dice"></div>
+        <div class="dice"></div>
+      </div>
+  </div>
+  <%# End Dice Roller %>
+  <div class="d-flex">
   <p>Delete this character?</p>
   <%= link_to character_path(@character[:id]), data: { turbo_method: :delete, turbo_confirm: "Really delete this character?"} do %>
   <button class="bg-danger">Delete</button>
   <% end %>
+  </div>
 </div>
