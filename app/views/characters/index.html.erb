@@ -1,8 +1,14 @@
-<h1>let's get this going</h1>
-<% @characters.each do |character| %>
-  <h2><%= link_to character.name, character_path(character) %></h2>
-<% end %>
+<div class="d-flex flex-column align-items-center">
+  <h1>Current Roster</h1>
+  <div class="d-flex">
+    <% @characters.each do |character| %>
+      <h2 class="mx-3"><%= link_to character.name, character_path(character) %></h2>
+    <% end %>
+  </div>
+</div>
 <div>
   <br>
-  <%= render "shared/char_create", character: @character %>
+  <div class="container w-50 border border-dark rounded p-4 ">
+    <%= render "shared/char_create", character: @character %>
+  </div>
 </div>
