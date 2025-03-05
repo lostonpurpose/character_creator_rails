@@ -1,19 +1,32 @@
 <div class="d-flex flex-column align-items-center">
   <h2><%= @character.name %>:</h2>
-  <ul>
-    <li>Name: <%= @character.name %></li>
-      <li>Age: <%= @character.age %></li>
-    <li>Class: <%= @character.job %></li>
-    <li>Race: <%= @character.race %></li>
-    <li>Gender: <%= @character.gender %></li>
-    <%= link_to "Home", characters_path  %>
-  </ul>
+  <div class="d-flex">
+    <div>
+      <ul>
+        <li>Age: <%= @character.age %></li>
+        <li>Class: <%= @character.job %></li>
+        <li>Race: <%= @character.race %></li>
+        <li>Gender: <%= @character.gender %></li>
+        <%= link_to "Home", characters_path  %>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>Strength: <%= @character.strength %></li>
+        <li>Dexterity: <%= @character.dexterity %></li>
+        <li>Constitution: <%= @character.constitution %></li>
+        <li>Intelligence: <%= @character.intelligence %></li>
+        <li>Wisdom: <%= @character.wisdom %></li>
+        <li>Charisma: <%= @character.charisma %></li>
+      </ul>
+    </div>
+  </div>
 
 <%# Dice Roller %>
   <div>
     <h2>Roll Your Stats!</h2>
     <button class="roll">ROLL</button>
-      <div class="d-flex dice-box justify-content-between">
+      <div class="d-flex dice-box justify-content-between mb-5">
         <div class="dice d1">?</div>
         <div class="dice d2">?</div>
         <div class="dice d3">?</div>
