@@ -1,15 +1,15 @@
-<div class="">
-<h2><%= @character.name %>:</h2>
-<ul>
-  <li>Name: <%= @character.name %></li>
-    <li>Age: <%= @character.age %></li>
-  <li>Class: <%= @character.job %></li>
-  <li>Race: <%= @character.race %></li>
-  <li>Gender: <%= @character.gender %></li>
-  <%= link_to "Home", characters_path  %>
-</ul>
-<p>Delete this character?</p>
-<%= link_to character_path(@character[:id]), data: { turbo_method: :delete, turbo_confirm: "Really delete this character?"} do %>
-<button class="bg-danger">Delete</button>
-<% end %>
+<div class="d-flex flex-column align-items-center">
+  <h2><%= @character.name %>:</h2>
+  <ul>
+    <li>Name: <%= @character.name %></li>
+      <li>Age: <%= @character.age %></li>
+    <li>Class: <%= @character.job %></li>
+    <li>Race: <%= @character.race %></li>
+    <li>Gender: <%= @character.gender %></li>
+    <%= link_to "Home", characters_path  %>
+  </ul>
+  <p>Delete this character?</p>
+  <%= link_to character_path(@character[:id]), data: { turbo_method: :delete, turbo_confirm: "Really delete this character?"} do %>
+  <button class="bg-danger">Delete</button>
+  <% end %>
 </div>
