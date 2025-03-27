@@ -4,10 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed"); // Debugging log to confirm the event fires
 
   const rollButton = document.querySelector(".roll");
+  const characterID = rollButton.dataset.characterId;
   const diceElements = {
-    d1: document.querySelector(".d1"),
-    d2: document.querySelector(".d2"),
-    d3: document.querySelector(".d3"),
+    d1: document.querySelector(`.d1[data-character-id="${characterID}"]`),
+    d2: document.querySelector(`.d2[data-character-id="${characterID}"]`),
+    d3: document.querySelector(`.d3[data-character-id="${characterID}"]`),
   };
 
   console.log("Roll button:", rollButton); // Debugging log to check if the roll button exists
@@ -41,7 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error updating character strength:", error);
     }
   });
+  // grays out the button and changes its text to "rolled"
+  rollButton.classList.add("roll-finished");
+  rollButton.innerText = "Rolled";
+  rollButton.disabled = true;
 });
+
+
 
 function rollDice() {
   return [1, 2, 3].map(() => Math.floor(Math.random() * 6) + 1);
