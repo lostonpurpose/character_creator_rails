@@ -26,7 +26,13 @@
   <div>
     <h2>Roll Your Stats!</h2>
     <div class="">
-      <button class="roll" data-character-id="<%= @character.id %>">STRENGTH</button>
+      <%# each button logic determines if ability has already been rolled. %>
+      <button 
+        class="roll" 
+        data-character-id="<%= @character.id %>" 
+        <%= "disabled" if @character.strength.present? %>>
+        <%= @character.strength.present? ? "Rolled" : "STRENGTH" %>
+      </button>
       <button class="roll" data-character-id="<%= @character.id %>">DEXTERITY</button>
       <button class="roll" data-character-id="<%= @character.id %>">CONSTITUTION</button>
     </div>

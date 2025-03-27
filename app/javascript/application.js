@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     d3: document.querySelector(`.d3[data-character-id="${characterID}"]`),
   };
 
+  console.log(`character ID is: ${characterID}`);
+
   console.log("Roll button:", rollButton); // Debugging log to check if the roll button exists
   console.log("Dice elements:", diceElements); // Debugging log to check if dice elements exist
 
@@ -42,10 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error updating character strength:", error);
     }
   });
-  // grays out the button and changes its text to "rolled"
-  rollButton.classList.add("roll-finished");
-  rollButton.innerText = "Rolled";
-  rollButton.disabled = true;
 });
 
 
