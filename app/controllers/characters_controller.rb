@@ -22,6 +22,19 @@ class CharactersController < ApplicationController
     end
   end
 
+  def update_strength
+    @character = Character.find(params[:id])
+  
+    # Parse the incoming JSON data from the request body
+    strength = JSON.parse(request.body.read)["strength"]
+  
+    if @character.update(strength: strength)
+      render json: { status: 'success', strength: @character.strength }
+    else
+      render json: { status: 'error', message: 'Failed to update strength' }
+    end
+  end
+
   def destroy
     @character = Character.find(params[:id])
     @character.destroy
@@ -31,7 +44,7 @@ class CharactersController < ApplicationController
   private
 
   def character_params
-    params.require(:character).permit(:name, :age, :job, :race, :gender)
+    params.require(:character).permit(:name, :age, :job, :race, :gender, :strength)
   end
 
 end

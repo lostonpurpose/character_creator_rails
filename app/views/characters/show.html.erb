@@ -25,13 +25,20 @@
 <%# Dice Roller %>
   <div>
     <h2>Roll Your Stats!</h2>
-    <button class="roll">ROLL</button>
-      <div class="d-flex dice-box justify-content-between mb-5">
-        <div class="dice d1">?</div>
-        <div class="dice d2">?</div>
-        <div class="dice d3">?</div>
-      </div>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL STRENGTH</button>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL DEXTERITY</button>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL CONSTITUTION</button>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL INTELLIGENCE</button>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL WISDOM</button>
+    <button class="roll" data-character-id="<%= @character.id %>">ROLL CHARISMA</button>
   </div>
+
+    <div class="d-flex dice-box justify-content-between mb-5">
+      <div class="dice d1">?</div>
+      <div class="dice d2">?</div>
+      <div class="dice d3">?</div>
+    </div>
+  
   <%# End Dice Roller %>
   <div class="d-flex">
   <p>Delete this character?</p>

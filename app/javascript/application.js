@@ -1,31 +1,67 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
-import "@popperjs/core"
-import "bootstrap"
+console.log("This is the correct application.js file!"); // Unique debugging log
 
-document.addEventListener("turbo:load", function() {
-  const roll = document.querySelector(".roll");
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded and parsed"); // Debugging log to confirm the event fires
 
-  // Only add event listener if the .roll button is present
-  if (roll) {
-    roll.addEventListener('click', rollDice);
+  const rollButton = document.querySelector(".roll");
+  const diceElements = {
+    d1: document.querySelector(".d1"),
+    d2: document.querySelector(".d2"),
+    d3: document.querySelector(".d3"),
+  };
+
+  console.log("Roll button:", rollButton); // Debugging log to check if the roll button exists
+  console.log("Dice elements:", diceElements); // Debugging log to check if dice elements exist
+
+  if (!rollButton || !diceElements.d1 || !diceElements.d2 || !diceElements.d3) {
+    console.warn("Required elements are missing from the DOM.");
+    return;
   }
 
-  function rollDice() {
-    let d1 = document.querySelector(".d1");
-    let d2 = document.querySelector(".d2");
-    let d3 = document.querySelector(".d3");
+  rollButton.addEventListener("click", async () => {
+    console.log("Roll button clicked"); // Debugging log to confirm the event fires
 
-    let n1 = Math.floor((Math.random() * 6) + 1);
-    let n2 = Math.floor((Math.random() * 6) + 1);
-    let n3 = Math.floor((Math.random() * 6) + 1);
+    const characterId = rollButton.dataset.characterId; // Get the character ID from the button's data attribute
+    console.log("Character ID:", characterId); // Debugging log for character ID
 
-    d1.innerText = `${n1}`;
-    d2.innerText = `${n2}`;
-    d3.innerText = `${n3}`;
+    const diceRolls = rollDice();
+    updateDiceElements(diceElements, diceRolls);
 
-    const totalScore = (n1 + n2 + n3);
-    return totalScore;
-  }
+    const totalScore = diceRolls.reduce((sum, roll) => sum + roll, 0);
+    console.log("Total score:", totalScore); // Debugging log for total score
+
+    try {
+      const response = await updateCharacterStrength(characterId, totalScore);
+      if (response.status === "success") {
+        console.log(`Character strength updated to: ${response.strength}`);
+      } else {
+        console.error("Failed to update strength");
+      }
+    } catch (error) {
+      console.error("Error updating character strength:", error);
+    }
+  });
 });
+
+function rollDice() {
+  return [1, 2, 3].map(() => Math.floor(Math.random() * 6) + 1);
+}
+
+function updateDiceElements(elements, rolls) {
+  elements.d1.innerText = rolls[0];
+  elements.d2.innerText = rolls[1];
+  elements.d3.innerText = rolls[2];
+}
+
+async function updateCharacterStrength(characterId, strength) {
+  const csrfToken = document.querySelector('[name="csrf-token"]').content;
+  const response = await fetch(`/characters/${characterId}/update_strength`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+    },
+    body: JSON.stringify({ strength }),
+  });
+  return response.json();
+}
