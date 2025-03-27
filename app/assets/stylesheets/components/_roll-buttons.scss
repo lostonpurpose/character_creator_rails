@@ -1,0 +1,15 @@
+.roll {
+    border-radius: 5px;
+    background-color: rgb(211, 234, 255);
+}
+
+.roll:hover {
+    background-color: rgb(116, 190, 255);
+}
+
+
+// after being clicked don't allow it to be clicked again
+
+.roll-finished {
+    background-color: rgb(114, 87, 85);
+}
